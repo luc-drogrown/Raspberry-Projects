@@ -15,6 +15,7 @@ def get_x(oldx):
     newx = oldx+direction
     return newx
 
+#updated
 def get_y(oldy):
     direction = 1
     if oldy+5+direction == 63:
