@@ -15,7 +15,6 @@ def get_x(oldx):
     newx = oldx+direction
     return newx
 
-#updated
 def get_y(oldy):
     direction = 1
     if oldy+5+direction == 63:
@@ -34,7 +33,8 @@ try:
     y += get_y(y)
     while True:
         with canvas(device) as draw:
-            draw.rectangle([(x,y), (x+5, y+5)], fill="white", width=2)
+            #draw.rectangle([(x,y), (x+5, y+5)], fill="white", width=2)
+            draw.rectangle([(64, 32), (69, 37)], fill="white", width=2)
         time.sleep(1)
 except KeyboardInterrupt:
     device.cleanup()
