@@ -38,23 +38,33 @@ def createSession():
     
 def getStats(sid):
     statsUrl = "http://localhost/api/stats/summary"
-    infoUrl = "http://localhost/api/info/system"
     
     if sid != 0:
         header = {"X-FTL-SID": sid}
     
     stats_r = requests.get(statsUrl, headers=header)
-    info_r = requests.get(infoUrl, headers=header)
     stats = stats_r.json()
-    info = info_r.json()
 
     return stats
+
+def getInfo(sid):
+    infoUrl = "http://localhost/api/info/system"
+    if sid != 0:
+        header = {"X-FTL-SID": sid}
+
+    info_r = requests.get(infoUrl, headers=header)
+    info = info_r.json()
+
+    return info
 
 try:
     print("Scripts is running!")
     sid = createSession()
+
     while True:
         stats = getStats(sid)
+        info = getInfo(sid)
+
         with canvas(device) as draw:
             if menu == 0:
                 draw.text((5, 5), "Pi-Hole: Ads", fill="white")
@@ -71,7 +81,8 @@ try:
                 draw.line([(0, 20), (127, 20)], fill="white")
                 draw.text((5, 25), f"Uptime: {info['system']['uptime']} s", fill="white")
                 draw.text((5, 45), f"CPU: {info['system']['cpu']['%cpu']} %", fill="white")
-        time.sleep(5)
+        time.sleep(2)
+
 except KeyboardInterrupt:
     device.cleanup()
     print("Clean exit!")
