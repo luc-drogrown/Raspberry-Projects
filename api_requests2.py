@@ -11,7 +11,7 @@ try:
 
         sid = data['session']['sid']
         print(f"Login Succesful! SID: {sid}")
-        stats_url = "https://localhost/api/stats/summary"
+        stats_url = "http://localhost/api/stats/summary"
         header = {"X-FTL-SID": sid}
 
         stats_r = requests.get(stats_url, headers=header)
