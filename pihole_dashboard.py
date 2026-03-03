@@ -43,7 +43,7 @@ try:
         with canvas(device) as draw:
             draw.text((5,5), "Pi-Hole Dashboard", fill="white")
             draw.line([(0,20), (127,20)], fill="white")
-            draw.text((5,25), "Ads Today: {stats['queries']['blocked']}")
+            draw.text((5,25), f"Ads Today: {stats['queries']['blocked']}", fill="white")
         time.sleep(5)
 except KeyboardInterrupt:
     device.cleanup()
