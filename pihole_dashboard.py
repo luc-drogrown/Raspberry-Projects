@@ -4,6 +4,7 @@ from luma.oled.device import ssd1306
 import time
 import requests
 from gpiozero import Button
+import subprocess
 
 #initialize display
 serial = spi(device=0, port=0, gpio_DC=24, gpio_RST=25)
@@ -62,6 +63,8 @@ try:
     sid = createSession()
 
     while True:
+        button.when_pressed = button_pressed
+
         stats = getStats(sid)
         info = getInfo(sid)
 
@@ -80,7 +83,7 @@ try:
                 draw.text((5, 5), "Pi-Hole: Status", fill="white")
                 draw.line([(0, 20), (127, 20)], fill="white")
                 draw.text((5, 25), f"Uptime: {info['system']['uptime']} s", fill="white")
-                draw.text((5, 45), f"CPU: {info['system']['cpu']['%cpu']} %", fill="white")
+                draw.text((5, 45), f"CPU: {info['system']['cpu']['%cpu']:.2f} %", fill="white")
         time.sleep(2)
 
 except KeyboardInterrupt:
